@@ -3,133 +3,180 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Café Péra - Home Bar</title>
+    <title>CAFÉ PÉRA | Home Bar</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;900&display=swap" rel="stylesheet">
     <style>
-        /* La Specialista Maestro Inspired Theme */
+        /* Dayglow-Inspired Minimalist Aesthetic */
         :root {
-            --bg-dark: #121212; /* Deep black chassis */
-            --bg-panel: #1e1e1e;
-            --text-main: #f0f0f0;
-            --steel: #b0b5b9; /* Brushed stainless steel */
-            --accent-red: #d32f2f; /* Indicator light red */
-            --gauge-blue: #4fc3f7; /* Cold extraction indicator */
+            --bg-color: #FAFAFA; /* Stark, clean off-white */
+            --text-main: #000000; /* High contrast black */
+            --accent: #EAEAEA;
+            --font-main: 'Inter', sans-serif;
         }
 
         body {
             margin: 0;
             padding: 0;
-            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
-            background-color: var(--bg-dark);
+            font-family: var(--font-main);
+            background-color: var(--bg-color);
             color: var(--text-main);
-            min-height: 100vh;
+            text-transform: uppercase; /* Editorial feel */
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /* Marquee Header */
+        .marquee {
+            background-color: var(--text-main);
+            color: var(--bg-color);
+            padding: 0.5rem 0;
+            font-size: 0.8rem;
+            font-weight: 600;
+            letter-spacing: 2px;
+            overflow: hidden;
+            white-space: nowrap;
+        }
+        
+        .marquee span {
+            display: inline-block;
+            animation: marquee 15s linear infinite;
+        }
+
+        @keyframes marquee {
+            0% { transform: translateX(100%); }
+            100% { transform: translateX(-100%); }
         }
 
         header {
             text-align: center;
-            padding: 3rem 1rem 2rem;
-            border-bottom: 1px solid #333;
-            background: linear-gradient(180deg, #1a1a1a 0%, var(--bg-dark) 100%);
+            padding: 4rem 1rem;
+            border-bottom: 2px solid var(--text-main);
         }
 
         h1 {
-            font-size: 2.5rem;
-            letter-spacing: 4px;
-            text-transform: uppercase;
-            margin: 0 0 0.5rem 0;
-            color: var(--steel);
-            font-weight: 300;
+            font-size: clamp(3rem, 8vw, 6rem);
+            font-weight: 900;
+            letter-spacing: -2px;
+            margin: 0;
+            line-height: 1;
         }
 
         .subtitle {
-            color: var(--accent-red);
-            font-size: 0.9rem;
-            letter-spacing: 2px;
-            text-transform: uppercase;
+            font-size: 1rem;
+            font-weight: 600;
+            letter-spacing: 4px;
+            margin-top: 1rem;
         }
 
         main {
-            max-width: 1200px;
+            max-width: 1400px;
             margin: 0 auto;
-            padding: 2rem;
+            padding: 4rem 2rem;
+        }
+
+        .category-wrapper {
+            margin-bottom: 5rem;
         }
 
         h2 {
-            font-size: 1.5rem;
-            color: var(--steel);
-            border-bottom: 2px solid #333;
-            padding-bottom: 0.5rem;
-            margin: 2.5rem 0 1.5rem 0;
-            display: flex;
-            align-items: center;
-            gap: 10px;
+            font-size: 2.5rem;
+            font-weight: 900;
+            letter-spacing: -1px;
+            border-bottom: 4px solid var(--text-main);
+            padding-bottom: 1rem;
+            margin-bottom: 3rem;
         }
 
-        .cold-title {
-            color: var(--gauge-blue);
-        }
-
-        /* Grid Layout */
+        /* Stark Editorial Grid */
         .grid-container {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-            gap: 1.5rem;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 3rem 2rem;
         }
 
         .drink-card {
-            background-color: var(--bg-panel);
-            border: 1px solid #333;
-            border-radius: 8px;
-            overflow: hidden;
             cursor: pointer;
-            transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+            group: hover;
         }
 
-        .drink-card:hover {
-            transform: translateY(-5px);
-            border-color: var(--steel);
-            box-shadow: 0 8px 15px rgba(0,0,0,0.5);
-        }
-
-        /* Image Placeholder in Grid */
-        .drink-img-thumb {
+        .drink-img-container {
             width: 100%;
-            height: 150px;
-            background-color: #2a2a2a; /* Placeholder color */
+            aspect-ratio: 4/5; /* Portrait style photos */
+            background-color: var(--accent);
+            overflow: hidden;
+            margin-bottom: 1rem;
             display: flex;
             align-items: center;
             justify-content: center;
-            color: #555;
-            font-size: 0.8rem;
+            border: 1px solid transparent;
+            transition: border-color 0.3s ease;
+        }
+
+        .drink-card:hover .drink-img-container {
+            border-color: var(--text-main);
+        }
+
+        .drink-img-container img {
+            width: 100%;
+            height: 100%;
             object-fit: cover;
+            transition: transform 0.5s ease, filter 0.3s ease;
+            filter: grayscale(20%); /* Slightly muted for aesthetic */
+        }
+
+        .drink-card:hover .drink-img-container img {
+            transform: scale(1.05);
+            filter: grayscale(0%);
+        }
+
+        .placeholder-text {
+            color: #999;
+            font-size: 0.8rem;
+            font-weight: 600;
+            letter-spacing: 2px;
         }
 
         .drink-info {
-            padding: 1rem;
-            text-align: center;
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            border-top: 1px solid var(--text-main);
+            padding-top: 0.5rem;
         }
 
         .drink-name {
-            font-weight: 600;
+            font-weight: 900;
             font-size: 1.1rem;
             margin: 0;
+            letter-spacing: -0.5px;
         }
 
-        /* Modal (Popup) Styles */
+        .view-btn {
+            font-size: 0.7rem;
+            font-weight: 600;
+            letter-spacing: 1px;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .drink-card:hover .view-btn {
+            opacity: 1;
+        }
+
+        /* Minimalist Modal Popup */
         .modal-overlay {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(0, 0, 0, 0.85);
+            background: rgba(250, 250, 250, 0.95); /* Bright transparent overlay */
             display: flex;
             justify-content: center;
             align-items: center;
             opacity: 0;
             pointer-events: none;
-            transition: opacity 0.3s ease;
+            transition: opacity 0.4s ease;
             z-index: 1000;
-            backdrop-filter: blur(5px);
         }
 
         .modal-overlay.active {
@@ -138,139 +185,153 @@
         }
 
         .modal-content {
-            background-color: var(--bg-panel);
             padding: 2rem;
-            border-radius: 12px;
-            border: 1px solid var(--steel);
-            max-width: 500px;
+            max-width: 600px;
             width: 90%;
-            text-align: center;
-            transform: scale(0.9);
-            transition: transform 0.3s ease;
-            position: relative;
+            transform: translateY(20px);
+            transition: transform 0.4s ease;
         }
 
         .modal-overlay.active .modal-content {
-            transform: scale(1);
+            transform: translateY(0);
         }
 
         .close-btn {
-            position: absolute;
-            top: 10px;
-            right: 15px;
-            font-size: 1.5rem;
-            color: var(--steel);
+            position: fixed;
+            top: 2rem;
+            right: 3rem;
+            font-size: 3rem;
+            font-weight: 300;
+            color: var(--text-main);
             cursor: pointer;
             background: none;
             border: none;
-        }
-
-        .close-btn:hover {
-            color: var(--accent-red);
+            font-family: var(--font-main);
         }
 
         .modal-img {
             width: 100%;
-            height: 300px;
-            background-color: #2a2a2a; /* Placeholder */
-            border-radius: 8px;
-            margin-bottom: 1.5rem;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: #555;
-            object-fit: cover;
+            max-height: 70vh;
+            object-fit: contain;
+            margin-bottom: 2rem;
         }
 
         #modal-title {
-            font-size: 2rem;
-            margin: 0 0 1rem 0;
+            font-size: 3rem;
+            font-weight: 900;
+            letter-spacing: -1px;
+            margin: 0;
+            text-align: center;
+            border-bottom: 2px solid var(--text-main);
+            padding-bottom: 1rem;
         }
 
     </style>
 </head>
 <body>
 
+    <div class="marquee">
+        <span>CAFÉ PÉRA — ISTANBUL — DE'LONGHI LA SPECIALISTA MAESTRO — CAREFULLY CRAFTED AT HOME — </span>
+    </div>
+
     <header>
-        <h1>Café Péra</h1>
-        <div class="subtitle">Home Bar Menu</div>
+        <h1>CAFÉ PÉRA</h1>
+        <div class="subtitle">Home Coffee Bar</div>
     </header>
 
     <main>
-        <h2><span style="color:var(--accent-red)">●</span> Hot Extraction</h2>
-        <div class="grid-container" id="hot-drinks">
-            <!-- JavaScript will populate this -->
-        </div>
+        <section class="category-wrapper">
+            <h2>Hot</h2>
+            <div class="grid-container" id="hot-drinks">
+                </div>
+        </section>
 
-        <h2 class="cold-title"><span>❄</span> Cold Extraction</h2>
-        <div class="grid-container" id="cold-drinks">
-            <!-- JavaScript will populate this -->
-        </div>
+        <section class="category-wrapper">
+            <h2>Cold</h2>
+            <div class="grid-container" id="cold-drinks">
+                </div>
+        </section>
     </main>
 
-    <!-- Modal Popup for Drink Details -->
     <div class="modal-overlay" id="drink-modal">
+        <button class="close-btn" onclick="closeModal()">×</button>
         <div class="modal-content">
-            <button class="close-btn" onclick="closeModal()">×</button>
             <img class="modal-img" id="modal-img" src="" alt="Drink Photo" style="display: none;">
-            <div class="modal-img" id="modal-placeholder">Photo Placeholder</div>
             <h3 id="modal-title">Drink Name</h3>
         </div>
     </div>
 
     <script>
-        // Data for your menu
+        // Menu Data - Image files connected
         const menuData = {
             hot: [
-                { name: "Espresso (Single / Double)" },
-                { name: "Americano" },
-                { name: "Coffee" },
-                { name: "Flat White" },
-                { name: "Latte Macchiato" },
-                { name: "Cappuccino" },
-                { name: "Turkish Coffee" },
-                { name: "French Coffee" },
-                { name: "Greek Coffee" },
-                { name: "Café Péra Blend" },
-                { name: "Arabic Coffee" }
+                { name: "Espresso", image: "IMG_7051.jpg" },
+                { name: "Americano", image: "" },
+                { name: "Coffee", image: "" },
+                { name: "Flat White", image: "" },
+                { name: "Latte Macchiato", image: "" },
+                { name: "Cappuccino", image: "" },
+                { name: "Turkish Coffee", image: "IMG_6465.jpg" },
+                { name: "French Coffee", image: "" },
+                { name: "Greek Coffee", image: "" },
+                { name: "Café Péra Blend", image: "" },
+                { name: "Arabic Coffee", image: "IMG_8650.jpg" }
             ],
             cold: [
-                { name: "Espresso Cold" },
-                { name: "Cold Brew" },
-                { name: "Desert Velvet Iced" }
+                { name: "Espresso Cold", image: "" },
+                { name: "Cold Brew", image: "" },
+                { name: "Desert Velvet Iced", image: "IMG_6992.jpg" }
             ]
         };
 
-        // Function to create a card HTML string
+        // Function to create the editorial style card
         function createCard(drink) {
+            const imgHTML = drink.image 
+                ? `<img src="${drink.image}" alt="${drink.name}">`
+                : `<div class="placeholder-text">IMAGE PENDING</div>`;
+
             return `
-                <div class="drink-card" onclick="openModal('${drink.name}')">
-                    <div class="drink-img-thumb">Add Photo</div>
+                <div class="drink-card" onclick="openModal('${drink.name}', '${drink.image || ''}')">
+                    <div class="drink-img-container">
+                        ${imgHTML}
+                    </div>
                     <div class="drink-info">
                         <p class="drink-name">${drink.name}</p>
+                        <span class="view-btn">VIEW +</span>
                     </div>
                 </div>
             `;
         }
 
-        // Render the grids
+        // Render grids
         document.getElementById('hot-drinks').innerHTML = menuData.hot.map(createCard).join('');
         document.getElementById('cold-drinks').innerHTML = menuData.cold.map(createCard).join('');
 
         // Modal Logic
         const modal = document.getElementById('drink-modal');
         const modalTitle = document.getElementById('modal-title');
+        const modalImg = document.getElementById('modal-img');
 
-        function openModal(drinkName) {
+        function openModal(drinkName, imageSrc) {
             modalTitle.innerText = drinkName;
+            
+            if (imageSrc) {
+                modalImg.src = imageSrc;
+                modalImg.style.display = 'block';
+            } else {
+                modalImg.style.display = 'none';
+            }
+            
             modal.classList.add('active');
         }
 
         function closeModal() {
             modal.classList.remove('active');
+            setTimeout(() => {
+                modalImg.src = '';
+            }, 400);
         }
 
-        // Close modal if clicking outside the content box
         modal.addEventListener('click', function(e) {
             if (e.target === modal) {
                 closeModal();
